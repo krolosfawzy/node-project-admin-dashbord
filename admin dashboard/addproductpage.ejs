@@ -325,7 +325,7 @@ background-size: cover; */
  debugger;
           $.ajax({
 						type: 'POST',
-                        data:(JSON.stringify(product)),
+                        data:($("#image").val()),
                         contentType: 'application/json',
                         url: 'http://localhost:5000/addproduct',						
                         success: function(data) {
@@ -418,13 +418,39 @@ background-size: cover; */
                 dialog.dialog("open");
             });
          
-            $( ".updateproduct" ).button().on("click", function () {
+            $( ".updateproduct" ).button().on("click","updateproduct", function () {
                 debugger;
                 setTimeout(()=>{dialog.dialog("open");},0); 
                 console.log("skjsksksksksksjjjshshshskoko");
             });
 
-            
+            $('input[type="file"]').change(function(){
+                debugger
+                var data = new FormData();
+                $.each($('#image')[0].files, function(i, file) {
+                data.append('file-'+i, file);
+                });
+                
+                
+            $.ajax({
+						type: "POST",
+                        enctype: 'multipart/form-data',
+                        url: 'http://localhost:3030/upload_file',
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        timeout: 600000,						
+                        success: function(data) {
+                            console.log('success'); 
+                            //dialog.dialog("close");
+                        },
+                        error: function(err) {
+                            console.log(err);
+                           // dialog.dialog("close");
+                        }
+            });
+        });
             
         });
     </script>
@@ -471,6 +497,9 @@ background-size: cover; */
                 $('#updateid').val(nummid);
                 $('#nameval').val(name);
             };
+        
+
+
         
     </script>
     <%# ///////////////////////////////////////////////////////////////////// %>

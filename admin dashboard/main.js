@@ -113,7 +113,7 @@ app.post("/addproduct", (req,res)=>{
 
 
   //////////////////////////
-  //http://localhost:5000/deletepro/?id=
+  //http://localhost:5000/deletepro/:name
   app.delete("/deletepro/:name",(req,res)=>{
     con2.deleteOne({Name:req.params.name}, (err, item) => {
       console.log(item);
