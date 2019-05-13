@@ -425,10 +425,14 @@ background-size: cover; */
             });
 
             $('input[type="file"]').change(function(){
-                debugger
+                //debugger
+                console.log("change...")
                 var data = new FormData();
                 $.each($('#image')[0].files, function(i, file) {
+                    console.log(file);
+                    //data=file;
                 data.append('file-'+i, file);
+                console.log(data)
                 });
                 
                 
@@ -439,7 +443,6 @@ background-size: cover; */
                         data: data,
                         processData: false,
                         contentType: false,
-                        cache: false,
                         timeout: 600000,						
                         success: function(data) {
                             console.log('success'); 

@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 var filenamenew;
 var fileStorage =   multer.diskStorage({
     destination: function (req, file, callback) {
-      callback(null, './uploadfile/imges');
+      callback(null, './uploadfile/images');
       //'./uploads':  Folder path where the file will be created
     },
     filename: function (req, file, callback) {
@@ -32,7 +32,7 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
-var upload = multer({ storage : fileStorage}).single('image');
+var upload = multer({ storage : fileStorage}).single('file-0');
 
 app.get('/',function(req,res){
     res.sendFile(__dirname + "/Fileupload.html");
@@ -43,9 +43,11 @@ app.post('/upload_file',function(req,res){
   //call upload object created before
   upload(req,res,function(err) {
       if(err) {
-          return res.end("Error uploading file." +err.toString());
+        console.log(err.toString());
+         // return res.end("Error uploading file." +err.toString());
       }
       console.log("in method"+filenamenew);
+      
       //res.send(filenamenew);
   });
 });
